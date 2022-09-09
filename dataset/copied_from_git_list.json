@@ -3,14 +3,16 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "medalion_storage",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"suffix": "2"
+			}
 		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"fileSystem": "bronze"
+				"type": "AzureBlobFSLocation"
 			}
 		},
 		"schema": {}
