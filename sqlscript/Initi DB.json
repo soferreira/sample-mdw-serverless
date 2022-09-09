@@ -11,7 +11,7 @@
 				"language": "sql"
 			},
 			"currentConnection": {
-				"databaseName": "factories",
+				"databaseName": "master",
 				"poolName": "Built-in"
 			},
 			"resultLimit": 5000
