@@ -230,10 +230,6 @@
 												}
 											},
 											"snapshot": true,
-											"sparkPool": {
-												"referenceName": "SparkPool",
-												"type": "BigDataPoolReference"
-											},
 											"executorSize": null,
 											"conf": {
 												"spark.dynamicAllocation.enabled": null,
