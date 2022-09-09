@@ -7,7 +7,7 @@
 				"type": "Lookup",
 				"dependsOn": [
 					{
-						"activity": "ForEach1",
+						"activity": "ForEach Control File",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -107,7 +107,7 @@
 				}
 			},
 			{
-				"name": "ForEach1",
+				"name": "ForEach Control File",
 				"type": "ForEach",
 				"dependsOn": [],
 				"userProperties": [],
