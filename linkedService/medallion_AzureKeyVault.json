@@ -1,5 +1,5 @@
 {
-	"name": "medallion_kv_ls",
+	"name": "medallion_AzureKeyVault",
 	"type": "Microsoft.Synapse/workspaces/linkedservices",
 	"properties": {
 		"annotations": [],

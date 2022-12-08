@@ -4,7 +4,7 @@
 		"nbformat": 4,
 		"nbformat_minor": 2,
 		"bigDataPool": {
-			"referenceName": "SparkPool",
+			"referenceName": "sparkpool",
 			"type": "BigDataPoolReference"
 		},
 		"sessionProperties": {
@@ -12,12 +12,13 @@
 			"driverCores": 4,
 			"executorMemory": "28g",
 			"executorCores": 4,
-			"numExecutors": 2,
+			"numExecutors": 1,
+			"runAsWorkspaceSystemIdentity": false,
 			"conf": {
 				"spark.dynamicAllocation.enabled": "false",
-				"spark.dynamicAllocation.minExecutors": "2",
-				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "ec367c91-a20e-4999-8583-b23652add476"
+				"spark.dynamicAllocation.minExecutors": "1",
+				"spark.dynamicAllocation.maxExecutors": "1",
+				"spark.autotune.trackingId": "2e282572-ca08-4b40-8fba-ef16042ab844"
 			}
 		},
 		"metadata": {
@@ -31,21 +32,22 @@
 				"name": "python"
 			},
 			"a365ComputeOptions": {
-				"id": "/subscriptions/d134efee-67e2-4db0-a253-903d6309fe47/resourceGroups/new_pr/providers/Microsoft.Synapse/workspaces/medalionsynapse2/bigDataPools/SparkPool",
-				"name": "SparkPool",
+				"id": "/subscriptions/d134efee-67e2-4db0-a253-903d6309fe47/resourceGroups/medallion_project/providers/Microsoft.Synapse/workspaces/medalionsynapse33/bigDataPools/sparkpool",
+				"name": "sparkpool",
 				"type": "Spark",
-				"endpoint": "https://medalionsynapse2.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/SparkPool",
+				"endpoint": "https://medalionsynapse33.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/sparkpool",
 				"auth": {
 					"type": "AAD",
-					"authResource": "https://dev.azuresynapse.net"
+					"authResource": "https://dev.azuresynapse.net",
+					"authHeader": null
 				},
 				"sparkVersion": "3.2",
 				"nodeCount": 10,
 				"cores": 4,
 				"memory": 28,
-				"automaticScaleJobs": false
+				"extraHeader": null
 			},
-			"sessionKeepAliveTimeout": 30
+			"sessionKeepAliveTimeout": 10
 		},
 		"cells": [
 			{
@@ -71,7 +73,7 @@
 					"from io import BytesIO\r\n",
 					"from notebookutils import mssparkutils"
 				],
-				"execution_count": 1
+				"execution_count": 12
 			},
 			{
 				"cell_type": "code",
@@ -91,7 +93,7 @@
 					"    \"\"\"Returns a list of unique values from a given column\"\"\"\r\n",
 					"    return [ ele.__getattr__(column) for ele in df.select(column).distinct().collect()]"
 				],
-				"execution_count": 2
+				"execution_count": 3
 			},
 			{
 				"cell_type": "code",
@@ -111,14 +113,13 @@
 					"    \"\"\"Returns target path using factory, data model and date information\"\"\"\r\n",
 					"    dt_object = dt.strptime(date, \"%Y-%m-%dT%H:%M:%S\")\r\n",
 					"    return f\"/factory={factory_id}/dataModelName={data_model_name}/y={dt_object.year}/m={'%02d'% dt_object.month}/d={dt_object.day}/{uuid.uuid4()}.parquet\""
-				],
-				"execution_count": 3
+				]
 			},
 			{
 				"cell_type": "code",
 				"source": [
 					"# retrieve source storage connection string from key vault\r\n",
-					"# source_cs = mssparkutils.credentials.getSecretWithLS('medallion_kv_ls', 'medallion-acc-cs') # currently not working \r\n",
+					"source_cs = mssparkutils.credentials.getSecretWithLS('medallion_kv_ls', 'storage-cs')\r\n",
 					"\r\n",
 					"blob_service_client = BlobServiceClient.from_connection_string(source_cs)\r\n",
 					"blob_client = blob_service_client.get_container_client(source_container).get_blob_client(source_path)\r\n",
@@ -144,7 +145,7 @@
 					"    new_df.write.parquet(f\"abfss://silver@{account_name}.dfs.core.windows.net{create_target_path(factory_id, data_model_name, date)}\")\r\n",
 					""
 				],
-				"execution_count": 4
+				"execution_count": 32
 			}
 		]
 	}

@@ -5,7 +5,7 @@
 			"referenceName": "medalion_storage",
 			"type": "LinkedServiceReference",
 			"parameters": {
-				"suffix": "2"
+				"suffix": "33"
 			}
 		},
 		"annotations": [],
@@ -55,5 +55,6 @@
 				"type": "INT_32"
 			}
 		]
-	}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
 }

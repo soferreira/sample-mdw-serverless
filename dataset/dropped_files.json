@@ -5,15 +5,17 @@
 			"referenceName": "medalion_storage",
 			"type": "LinkedServiceReference",
 			"parameters": {
-				"suffix": "2"
+				"suffix": "33"
 			}
 		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation"
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "bronze"
 			}
 		}
-	}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
 }
