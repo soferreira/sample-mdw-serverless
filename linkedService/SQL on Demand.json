@@ -1,10 +1,10 @@
 {
 	"name": "SQL on Demand",
-	"type": "Microsoft.Synapse/workspaces/linkedservices",
 	"properties": {
 		"parameters": {
 			"suffix": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "33"
 			}
 		},
 		"annotations": [],
@@ -16,5 +16,6 @@
 			"referenceName": "AutoResolveIntegrationRuntime",
 			"type": "IntegrationRuntimeReference"
 		}
-	}
+	},
+	"type": "Microsoft.Synapse/workspaces/linkedservices"
 }
